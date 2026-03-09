@@ -1,0 +1,22 @@
+---
+layout: layouts/base.njk
+---
+<div class="project">
+  <aside class="project-meta">
+    <h1>{{ title }}</h1>
+    <p>{{ description }}</p>
+    {% if tags %}
+  <div class="project-tags">
+    {% for tag in tags %}
+      {% if tag != "projects" and tag != "work" and tag != "selected" and tag != "spotlight" %}
+        <a href="/projects/?tag={{ tag }}" class="tag">{{ tag }}</a>
+      {% endif %}
+    {% endfor %}
+  </div>
+{% endif %}
+<a href="/writing/" class="back-link">🡨 Back</a>
+  </aside>
+  <div class="project-content">
+    {{ content | safe }}
+  </div>
+</div>

@@ -1,0 +1,205 @@
+{
+  "main": {
+    "id": "5d02b3424f0f3736",
+    "type": "split",
+    "children": [
+      {
+        "id": "130e55cbe2717876",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "235824fd88b93f8a",
+            "type": "leaf",
+            "state": {
+              "type": "graph",
+              "state": {},
+              "icon": "lucide-git-fork",
+              "title": "Graph view"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "3d2294ed418df9e3",
+    "type": "split",
+    "children": [
+      {
+        "id": "cb41b5d39c20f741",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "d9be89a364a31c00",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical",
+                "autoReveal": false
+              },
+              "icon": "lucide-folder-closed",
+              "title": "Files"
+            }
+          },
+          {
+            "id": "7e385be993d4134a",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              },
+              "icon": "lucide-search",
+              "title": "Search"
+            }
+          },
+          {
+            "id": "2c00e4ff62470dde",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {},
+              "icon": "lucide-bookmark",
+              "title": "Bookmarks"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300
+  },
+  "right": {
+    "id": "5c65c05db2c220e2",
+    "type": "split",
+    "children": [
+      {
+        "id": "4c3dfe6fbd9c69b4",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "00996484c4ba1911",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-coming-in",
+              "title": "Backlinks"
+            }
+          },
+          {
+            "id": "5e7a6df59163bf5d",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-going-out",
+              "title": "Outgoing links"
+            }
+          },
+          {
+            "id": "410ca2f74309de45",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-tags",
+              "title": "Tags"
+            }
+          },
+          {
+            "id": "34c0cbfefe44ec2d",
+            "type": "leaf",
+            "state": {
+              "type": "all-properties",
+              "state": {
+                "sortOrder": "frequency",
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-archive",
+              "title": "All properties"
+            }
+          },
+          {
+            "id": "eb92cf996a06b73f",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "followCursor": false,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-list",
+              "title": "Outline"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300,
+    "collapsed": true
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "switcher:Open quick switcher": false,
+      "graph:Open graph view": false,
+      "canvas:Create new canvas": false,
+      "daily-notes:Open today's daily note": false,
+      "templates:Insert template": false,
+      "command-palette:Open command palette": false,
+      "bases:Create new base": false
+    }
+  },
+  "active": "235824fd88b93f8a",
+  "lastOpenFiles": [
+    "_site/Site_Vault/writing/A Journey Through HEL/index.html",
+    "_site/Site_Vault/writing/A Journey Through HEL",
+    "_site/Site_Vault/writing/A Journey Through HEL - Copy/index.html",
+    "_site/Site_Vault/writing/A Journey Through HEL - Copy",
+    "_site/Site_Vault/writing/A Journey Through HEL - Copy (4)/index.html",
+    "_site/Site_Vault/writing/A Journey Through HEL - Copy (5)/index.html",
+    "_site/Site_Vault/writing/A Journey Through HEL - Copy (3)/index.html",
+    "_site/Site_Vault/writing/A Journey Through HEL - Copy (2)/index.html",
+    "_site/Site_Vault/projects/002_HEL - Copy (2)/index.html",
+    "_site/Site_Vault/projects/002_HEL - Copy/index.html",
+    "_site/Site_Vault/projects/002_HEL/index.html",
+    "Site_Vault/writing/A Journey Through HEL.md",
+    "Site_Vault/writing/A Journey Through HEL - Copy.md",
+    "Site_Vault/writing/A Journey Through HEL - Copy (5).md",
+    "Site_Vault/writing/A Journey Through HEL - Copy (2).md",
+    "Site_Vault/writing/A Journey Through HEL - Copy (3).md",
+    "Site_Vault/writing/A Journey Through HEL - Copy (4).md",
+    "Site_Vault/projects/002_HEL.md",
+    "Site_Vault/projects/002_HEL - Copy.md",
+    "Site_Vault/projects/002_HEL - Copy (2).md",
+    "Site_Vault/projects/001_Project_test.md",
+    "node_modules/js-yaml/README.md",
+    "writing/A Journey Through HEL.md"
+  ]
+}

@@ -1,0 +1,134 @@
+---
+layout: layouts/base.njk
+---
+<div class="list-header">
+  <h1 class="list-title">{{ title }}</h1>
+  <div class="tab-labels" id="tab-labels">
+    <button class="tag-btn active" data-tag="all">All</button>
+  </div>
+</div>
+
+<div class="project-grid" id="project-grid">
+  {% for project in collections.projects %}
+  <div class="project-card" data-tags="{{ project.data.tags | join(',') }}">
+    <a href="{{ project.url }}"><img src="{{ project.data.headerimage }}" alt="{{ project.data.title }}" /></a>
+    <div class="project-card-info">
+      <a href="{{ project.url }}"><h2>{{ project.data.title }}</h2></a>
+      <span class="year">{{ project.data.date }}</span>
+      <br></br>
+      <p>{{ project.data.description }}</p>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+
+<script>
+  // ============================================
+  // TAG FILTERING
+  // ============================================
+  const skipTags = ['projects', 'work', 'selected', 'spotlight'];
+  const cards = document.querySelectorAll('.project-card');
+  const labelsContainer = document.getElementById('tab-labels');
+
+  const allTags = new Set();
+  cards.forEach(card => {
+    card.dataset.tags.split(',').forEach(tag => {
+      if (!skipTags.includes(tag.trim())) allTags.add(tag.trim());
+    });
+  });
+
+  allTags.forEach(tag => {
+    const btn = document.createElement('button');
+    btn.className = 'tag-btn';
+    btn.dataset.tag = tag;
+    btn.textContent = tag;
+    labelsContainer.appendChild(btn);
+  });
+
+  document.querySelectorAll('.tag-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.tag-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      const tag = btn.dataset.tag;
+      cards.forEach(card => {
+        const tags = card.dataset.tags.split(',').map(t => t.trim());
+        card.style.display = (tag === 'all' || tags.includes(tag)) ? 'flex' : 'none';
+      });
+    });
+  });
+
+  const params = new URLSearchParams(window.location.search);
+  const preselected = params.get('tag');
+  if (preselected) {
+    cards.forEach(card => {
+      const tags = card.dataset.tags.split(',').map(t => t.trim());
+      card.style.display = tags.includes(preselected) ? 'flex' : 'none';
+    });
+    setTimeout(() => {
+      document.querySelectorAll('.tag-btn').forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.tag === preselected);
+      });
+    }, 0);
+  }
+
+  // ============================================
+  // BLOB SHAPES
+  // ============================================
+ function generateBlob(seed, blobiness, tension) {
+  let s = seed;
+  function rand(min, max) {
+    s = (s * 16807 + 0) % 2147483647;
+    return min + (s / 2147483647) * (max - min);
+  }
+
+  const cx = 50, cy = 50, baseR = 42;
+  const numPoints = 10;
+  const points = [];
+
+  for (let i = 0; i < numPoints; i++) {
+    const angle = (i / numPoints) * Math.PI * 2;
+    const r = baseR + rand(-blobiness, blobiness);
+    points.push({
+      x: cx + Math.cos(angle) * r,
+      y: cy + Math.sin(angle) * r
+    });
+  }
+
+  const n = points.length;
+  let path = `from ${points[0].x.toFixed(2)}% ${points[0].y.toFixed(2)}%`;
+
+  for (let i = 0; i < n; i++) {
+    const curr = points[i];
+    const next = points[(i + 1) % n];
+    const prev = points[(i - 1 + n) % n];
+    const after = points[(i + 2) % n];
+
+    const c1x = curr.x + (next.x - prev.x) * tension;
+    const c1y = curr.y + (next.y - prev.y) * tension;
+    const c2x = next.x - (after.x - curr.x) * tension;
+    const c2y = next.y - (after.y - curr.y) * tension;
+
+    path += `,curve to ${next.x.toFixed(2)}% ${next.y.toFixed(2)}% with ${c1x.toFixed(2)}% ${c1y.toFixed(2)}% / ${c2x.toFixed(2)}% ${c2y.toFixed(2)}%`;
+  }
+
+  return `shape(${path})`;
+}
+
+// ← tweak these
+const BLOB_STATIC    = { blobiness: 6,  tension: 0.15 };
+const BLOB_HOVER     = { blobiness: 8, tension: 0.3  };
+
+document.querySelectorAll('.project-card img').forEach((img, i) => {
+  const seed = i * 12345 + 9999;
+  img.style.clipPath = generateBlob(seed, BLOB_STATIC.blobiness, BLOB_STATIC.tension);
+  img.style.transition = 'clip-path 0.4s ease';
+
+  img.addEventListener('mouseenter', () => {
+    img.style.clipPath = generateBlob(seed, BLOB_HOVER.blobiness, BLOB_HOVER.tension);
+  });
+  img.addEventListener('mouseleave', () => {
+    img.style.clipPath = generateBlob(seed, BLOB_STATIC.blobiness, BLOB_STATIC.tension);
+  });
+});
+
+</script>

@@ -1,0 +1,35 @@
+---
+layout: layouts/base.njk
+---
+<div class="project">
+  <aside class="project-meta">
+    <h1>{{ title }}</h1>
+    <p>{{ description }}</p>
+    <ul id="toc-list"></ul>
+
+  </aside>
+
+  <div class="project-content">
+    {{ content | safe }}
+  </div>
+
+  <div class="project-details">
+    <p><strong>Role:</strong> {{ role }}</p>
+    <p><strong>Client:</strong> {{ orgs }}</p>
+<p><strong>Collaborators:</strong> {{ collaborator }}</p>
+<p><strong>Location :</strong> {{ location }}</p>
+
+    </br>
+    {% if tags %}
+    <div class="project-tags">
+      {% for tag in tags %}
+        {% if tag != "projects" and tag != "work" and tag != "selected" and tag != "spotlight" %}
+          <a href="/projects/?tag={{ tag }}" class="tag">{{ tag }}</a>
+        {% endif %}
+      {% endfor %}
+    </div>
+    {% endif %}
+    <a href="/projects/" class="back-link">🡨 Back</a>
+  </div>
+</div>
+

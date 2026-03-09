@@ -1,0 +1,17 @@
+---
+layout: layouts/base.njk
+---
+<div class="three-col-wrapper">
+  <div class="col col-1">
+    {% set col1 %}{% include "../../Site_Vault/columns/teaching-col.md" %}{% endset %}
+    {{ col1 | markdown | safe }}
+  </div>
+  <div class="col col-2">
+    {% set col2 %}{% include "../../Site_Vault/columns/exhibits-col.md" %}{% endset %}
+    {{ col2 | markdown | safe }}
+  </div>
+  <div class="col col-3">
+    {% set col3 %}{% include "../../Site_Vault/columns/recognitions-col.md" %}{% endset %}
+    {{ col3 | markdown | safe }}
+  </div>
+</div>
