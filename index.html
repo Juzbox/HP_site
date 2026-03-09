@@ -250,11 +250,18 @@ const overlay = document.getElementById('mobile-nav-overlay');
 const close = document.getElementById('mobile-nav-close');
 
 if (toggle) {
-  toggle.addEventListener('click', () => overlay.classList.add('open'));
-  close.addEventListener('click', () => overlay.classList.remove('open'));
-  overlay.querySelectorAll('a').forEach(a => {
-    a.addEventListener('click', () => overlay.classList.remove('open'));
+  toggle.addEventListener('click', () => {
+  overlay.style.display = 'flex';
+});
+close.addEventListener('click', () => {
+  overlay.style.removeProperty('display');  
+  overlay.style.display = 'none';
+});
+overlay.querySelectorAll('a').forEach(a => {
+  a.addEventListener('click', () => {
+    overlay.style.display = 'none';
   });
+});
 }
 
 
