@@ -110,14 +110,12 @@ eleventyConfig.addTransform("collaborator-links", function(content, outputPath) 
       .sort((a, b) => parseInt(b.data.year) - parseInt(a.data.year));
   });
 
-  // ============================================
+// ============================================
   // ERROR REPORTING
   // ============================================
   eleventyConfig.configureErrorReporting({ allowMissingExtensions: true });
 
-  return {};
-
   return {
-  pathPrefix: "/HP_site/"
-};
+    pathPrefix: "/HP_site/"
+  };
 }
