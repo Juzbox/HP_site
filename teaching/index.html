@@ -228,6 +228,10 @@ Shortlisted for the <a href="https://distributeddesign.eu/awards/entries/t-furni
       showSlide(current + dir);
     }
 
+    if (window.innerWidth <= 640) {
+      setInterval(() => showSlide(current + 1), 5000);
+    }
+
     // ============================================
     // CONTENT SLIDESHOWS
     // ============================================
@@ -287,7 +291,7 @@ Shortlisted for the <a href="https://distributeddesign.eu/awards/entries/t-furni
     const lightbox = document.getElementById('lightbox');
     const lightboxImg = document.getElementById('lightbox-img');
 
-    document.querySelectorAll('img:not(.floating-img):not(.project-card img):not(.writing-image img)').forEach(img => {
+    document.querySelectorAll('img:not(.floating-img):not(.project-card-img):not(.writing-image img):not(.carousel-img)').forEach(img => {
       img.style.cursor = 'zoom-in';
       img.addEventListener('click', () => {
         lightboxImg.src = img.src;
@@ -301,6 +305,13 @@ Shortlisted for the <a href="https://distributeddesign.eu/awards/entries/t-furni
       lightbox.style.display = 'none';
       document.body.classList.remove('lightbox-open');
     });
+
+    document.querySelectorAll('.carousel-img').forEach(img => {
+  img.style.cursor = 'default';
+  img.addEventListener('click', (e) => {
+    e.stopPropagation();
+  });
+});
 
     // ============================================
     // MOBILE NAV
@@ -351,10 +362,6 @@ Shortlisted for the <a href="https://distributeddesign.eu/awards/entries/t-furni
         () => document.querySelector('.carousel-btn.prev')?.click()
       );
     }
-
-if (window.innerWidth <= 640) {
-  setInterval(() => showSlide(current + 1), 5000);
-}
 
     document.querySelectorAll('.content-slideshow').forEach(slideshow => {
       addSwipe(slideshow,

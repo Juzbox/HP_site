@@ -41,7 +41,7 @@
   <div class="carousel">
     
     <a href="/projects/s10/" class="carousel-slide active">
-      <img src="/assets/img/04_solar.gif" alt="LIFE WITH LIMITED ENERGY" />
+      <img src="/assets/img/04_solar.gif" alt="LIFE WITH LIMITED ENERGY" class="carousel-img" />
       <div class="carousel-caption">
         <h2>LIFE WITH LIMITED ENERGY</h2>
         <span class="year">2018</span>
@@ -50,7 +50,7 @@
     </a>
     
     <a href="/projects/convivialcity/" class="carousel-slide ">
-      <img src="/assets/img/team001.gif" alt="CONVIVIAL CITY" />
+      <img src="/assets/img/team001.gif" alt="CONVIVIAL CITY" class="carousel-img" />
       <div class="carousel-caption">
         <h2>CONVIVIAL CITY</h2>
         <span class="year">2021</span>
@@ -59,7 +59,7 @@
     </a>
     
     <a href="/projects/ikwoon/" class="carousel-slide ">
-      <img src="/assets/img/phone_mockup_5.jpg" alt="IKWOON" />
+      <img src="/assets/img/phone_mockup_5.jpg" alt="IKWOON" class="carousel-img" />
       <div class="carousel-caption">
         <h2>IKWOON</h2>
         <span class="year">2022</span>
@@ -68,7 +68,7 @@
     </a>
     
     <a href="/projects/CDV/" class="carousel-slide ">
-      <img src="/assets/img/CDI_Preview0021.gif" alt="LA CITÉ DE L’IMAGE ET DU VIVANT" />
+      <img src="/assets/img/CDI_Preview0021.gif" alt="LA CITÉ DE L’IMAGE ET DU VIVANT" class="carousel-img" />
       <div class="carousel-caption">
         <h2>LA CITÉ DE L’IMAGE ET DU VIVANT</h2>
         <span class="year">2023</span>
@@ -77,7 +77,7 @@
     </a>
     
     <a href="/projects/turfuplaybook/" class="carousel-slide ">
-      <img src="/assets/img/IMG_6480 (1).jpg" alt="THE TURFU PLAYBOOK" />
+      <img src="/assets/img/IMG_6480 (1).jpg" alt="THE TURFU PLAYBOOK" class="carousel-img" />
       <div class="carousel-caption">
         <h2>THE TURFU PLAYBOOK</h2>
         <span class="year">2023</span>
@@ -86,7 +86,7 @@
     </a>
     
     <a href="/projects/local-food/" class="carousel-slide ">
-      <img src="/assets/img/IMG_6825.jpg" alt="STRENGTHENING LOCAL FOOD SYSTEMS" />
+      <img src="/assets/img/IMG_6825.jpg" alt="STRENGTHENING LOCAL FOOD SYSTEMS" class="carousel-img" />
       <div class="carousel-caption">
         <h2>STRENGTHENING LOCAL FOOD SYSTEMS</h2>
         <span class="year">2024</span>
@@ -95,7 +95,7 @@
     </a>
     
     <a href="/projects/whatevercomesnext/" class="carousel-slide ">
-      <img src="/assets/img/_DSC0973.jpg" alt="WHATEVER COMES NEXT" />
+      <img src="/assets/img/_DSC0973.jpg" alt="WHATEVER COMES NEXT" class="carousel-img" />
       <div class="carousel-caption">
         <h2>WHATEVER COMES NEXT</h2>
         <span class="year">2024</span>
@@ -104,7 +104,7 @@
     </a>
     
     <a href="/projects/counter-twinning-in-gothenburg/" class="carousel-slide ">
-      <img src="/assets/img/Screenshot-2024-12-17-170301.png" alt="COUNTER-TWINNING IN GOTHENBURG" />
+      <img src="/assets/img/Screenshot-2024-12-17-170301.png" alt="COUNTER-TWINNING IN GOTHENBURG" class="carousel-img" />
       <div class="carousel-caption">
         <h2>COUNTER-TWINNING IN GOTHENBURG</h2>
         <span class="year">2025</span>
@@ -152,6 +152,10 @@
 
     function moveCarousel(dir) {
       showSlide(current + dir);
+    }
+
+    if (window.innerWidth <= 640) {
+      setInterval(() => showSlide(current + 1), 5000);
     }
 
     // ============================================
@@ -213,7 +217,7 @@
     const lightbox = document.getElementById('lightbox');
     const lightboxImg = document.getElementById('lightbox-img');
 
-    document.querySelectorAll('img:not(.floating-img):not(.project-card img):not(.writing-image img)').forEach(img => {
+    document.querySelectorAll('img:not(.floating-img):not(.project-card-img):not(.writing-image img):not(.carousel-img)').forEach(img => {
       img.style.cursor = 'zoom-in';
       img.addEventListener('click', () => {
         lightboxImg.src = img.src;
@@ -227,6 +231,13 @@
       lightbox.style.display = 'none';
       document.body.classList.remove('lightbox-open');
     });
+
+    document.querySelectorAll('.carousel-img').forEach(img => {
+  img.style.cursor = 'default';
+  img.addEventListener('click', (e) => {
+    e.stopPropagation();
+  });
+});
 
     // ============================================
     // MOBILE NAV
@@ -277,10 +288,6 @@
         () => document.querySelector('.carousel-btn.prev')?.click()
       );
     }
-
-if (window.innerWidth <= 640) {
-  setInterval(() => showSlide(current + 1), 5000);
-}
 
     document.querySelectorAll('.content-slideshow').forEach(slideshow => {
       addSwipe(slideshow,
