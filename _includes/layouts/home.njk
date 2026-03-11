@@ -4,22 +4,22 @@ layout: layouts/base.njk
 <div class="left">
   <div class="carousel">
     {% for project in collections.spotlight %}
-    <div class="carousel-slide {% if loop.first %}active{% endif %}">
-  <img src="{{ project.data.headerimage }}" alt="{{ project.data.title }}" />
-  <div class="carousel-caption">
-    <a href="{{ project.url }}"><h2>{{ project.data.title }}</h2></a>
-    <span class="year">{{ project.data.date }}</span>
-    <p>{{ project.data.description }}</p>
-  </div>
-</div>
+    <a href="{{ project.url }}" class="carousel-slide {% if loop.first %}active{% endif %}">
+      <img src="{{ project.data.headerimage }}" alt="{{ project.data.title }}" />
+      <div class="carousel-caption">
+        <h2>{{ project.data.title }}</h2>
+        <span class="year">{{ project.data.date }}</span>
+        <p>{{ project.data.description }}</p>
+      </div>
+    </a>
     {% endfor %}
   </div>
-<button class="carousel-btn prev" onclick="moveCarousel(-1)">🡨</button>
-<button class="carousel-btn next" onclick="moveCarousel(1)">🡪</button>
+  <button class="carousel-btn prev" onclick="moveCarousel(-1)">🡨</button>
+  <button class="carousel-btn next" onclick="moveCarousel(1)">🡪</button>
 </div>
 <div class="right">
   <h1>{{ title }}</h1>
   <p>{{ bio }}</p>
-<br></br>
+  <br>
   {{ content | safe }}
 </div>
