@@ -1096,6 +1096,7 @@ body.lightbox-open nav {
   font-weight: 500;
   line-height: 1.2;
   margin-right: 4rem;
+  text-transform: uppercase;
 }
 
 .writing-title a,
