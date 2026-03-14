@@ -8,7 +8,7 @@
   <link rel="stylesheet" href="/assets/css/style.css" />
 </head>
 
-<body class="">
+<body class="page-writing">
 
   <nav>
     <ul id="desktop-nav">
@@ -335,48 +335,94 @@
 
   <script>
     // ============================================
+    // SWIPE GESTURES — defined first so other code can use it
+    // ============================================
+    function addSwipe(element, onSwipeLeft, onSwipeRight) {
+      if (!element) return;
+      let startX = 0;
+      let startY = 0;
+
+      element.addEventListener('touchstart', (e) => {
+        startX = e.touches[0].clientX;
+        startY = e.touches[0].clientY;
+      }, { passive: true });
+
+      element.addEventListener('touchend', (e) => {
+        const dx = e.changedTouches[0].clientX - startX;
+        const dy = e.changedTouches[0].clientY - startY;
+        if (Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > 40) {
+          if (dx < 0) onSwipeLeft();
+          else onSwipeRight();
+        }
+      }, { passive: true });
+    }
+
+    // ============================================
     // HOME CAROUSEL
     // ============================================
-    const homeCarousel = document.querySelector('.carousel');
-    const homeSlides = homeCarousel ? homeCarousel.querySelectorAll('.carousel-slide') : [];
+    const slides = document.querySelectorAll('.carousel-slide');
+    const dotsContainer = document.querySelector('.carousel-dots');
     let current = 0;
 
-    function showSlide(index) {
-      if (homeSlides.length === 0) return;
-      homeSlides[current].classList.remove('active');
-      current = (index + homeSlides.length) % homeSlides.length;
-      homeSlides[current].classList.add('active');
+    function showSlide(n) {
+      slides.forEach(s => s.classList.remove('active'));
+      document.querySelectorAll('.carousel-dot').forEach(d => d.classList.remove('active'));
+      current = (n + slides.length) % slides.length;
+      slides[current].classList.add('active');
+      document.querySelectorAll('.carousel-dot')[current].classList.add('active');
     }
 
-    function moveCarousel(dir) {
-      showSlide(current + dir);
+    let timer = setInterval(() => showSlide(current + 1), 6000);
+
+    function resetTimer() {
+      clearInterval(timer);
+      timer = setInterval(() => showSlide(current + 1), 6000);
     }
 
-    if (window.innerWidth <= 640) {
-      setInterval(() => showSlide(current + 1), 5000);
+    if (dotsContainer) {
+      slides.forEach((_, i) => {
+        const dot = document.createElement('button');
+        dot.className = 'carousel-dot' + (i === 0 ? ' active' : '');
+        dot.addEventListener('click', () => {
+          showSlide(i);
+          resetTimer();
+        });
+        dotsContainer.appendChild(dot);
+      });
     }
+
+    const carousel = document.querySelector('.carousel');
+    addSwipe(carousel,
+      () => { showSlide(current + 1); resetTimer(); },
+      () => { showSlide(current - 1); resetTimer(); }
+    );
 
     // ============================================
     // CONTENT SLIDESHOWS
     // ============================================
     document.querySelectorAll('.content-slideshow').forEach(function(slideshow) {
-      const slides = slideshow.querySelectorAll('.content-slide');
-      const dots = slideshow.querySelectorAll('.content-dot');
+      const ssSlides = slideshow.querySelectorAll('.content-slide');
+      const ssDots = slideshow.querySelectorAll('.content-dot');
       let idx = 0;
 
       function showContentSlide(n) {
-        slides[idx].classList.remove('active');
-        dots[idx].classList.remove('active');
-        idx = (n + slides.length) % slides.length;
-        slides[idx].classList.add('active');
-        dots[idx].classList.add('active');
+        ssSlides[idx].classList.remove('active');
+        ssDots[idx].classList.remove('active');
+        idx = (n + ssSlides.length) % ssSlides.length;
+        ssSlides[idx].classList.add('active');
+        ssDots[idx].classList.add('active');
       }
 
       slideshow.querySelector('.content-prev').addEventListener('click', () => showContentSlide(idx - 1));
       slideshow.querySelector('.content-next').addEventListener('click', () => showContentSlide(idx + 1));
-      dots.forEach(dot => {
+      ssDots.forEach(dot => {
         dot.addEventListener('click', () => showContentSlide(parseInt(dot.dataset.index)));
       });
+
+      addSwipe(slideshow,
+        () => slideshow.querySelector('.content-next')?.click(),
+        () => slideshow.querySelector('.content-prev')?.click()
+      );
     });
 
     // ============================================
@@ -398,16 +444,7 @@
       });
     }
 
-    // ============================================
-    // EXTERNAL LINKS
-    // ============================================
-    document.querySelectorAll('a').forEach(link => {
-      const href = link.getAttribute('href');
-      if (href && (href.startsWith('http://') || href.startsWith('https://'))) {
-        link.setAttribute('target', '_blank');
-        link.setAttribute('rel', 'noopener noreferrer');
-      }
-    });
+
 
     // ============================================
     // LIGHTBOX
@@ -431,11 +468,9 @@
     });
 
     document.querySelectorAll('.carousel-img').forEach(img => {
-  img.style.cursor = 'default';
-  img.addEventListener('click', (e) => {
-    e.stopPropagation();
-  });
-});
+      img.style.cursor = 'default';
+      img.addEventListener('click', (e) => e.stopPropagation());
+    });
 
     // ============================================
     // MOBILE NAV
@@ -445,54 +480,77 @@
     const navClose = document.getElementById('mobile-nav-close');
 
     if (toggle) {
-      toggle.addEventListener('click', () => {
-        overlay.classList.add('open');
-      });
-      navClose.addEventListener('click', () => {
-        overlay.classList.remove('open');
-      });
+      toggle.addEventListener('click', () => overlay.classList.add('open'));
+      navClose.addEventListener('click', () => overlay.classList.remove('open'));
       overlay.querySelectorAll('a').forEach(a => {
-        a.addEventListener('click', () => {
-          overlay.classList.remove('open');
+        a.addEventListener('click', () => overlay.classList.remove('open'));
+      });
+    }
+
+    // ============================================
+    // FLOATING IMAGE (ABOUT PAGE)
+    // ============================================
+    const floatingImg = document.querySelector('.floating-img');
+    if (floatingImg) {
+      let fx = Math.random() * (window.innerWidth - 200);
+      let fy = Math.random() * (window.innerHeight - 200);
+      let vx = 0.6;
+      let vy = 0.4;
+      let angle = 0;
+      let rotationSpeed = 0.3;
+
+      if (window.innerWidth > 1200) {
+        floatingImg.addEventListener('mouseenter', () => rotationSpeed = 8);
+        floatingImg.addEventListener('mouseleave', () => rotationSpeed = 0.3);
+      }
+
+      function animateFloat() {
+        fx += vx;
+        fy += vy;
+        angle += rotationSpeed;
+        if (fx <= 0 || fx >= window.innerWidth - floatingImg.width) vx *= -1;
+        if (fy <= 0 || fy >= window.innerHeight - floatingImg.height) vy *= -1;
+        floatingImg.style.left = fx + 'px';
+        floatingImg.style.top = fy + 'px';
+        floatingImg.style.transform = `rotate(${angle}deg)`;
+        requestAnimationFrame(animateFloat);
+      }
+      animateFloat();
+    }
+
+    // ============================================
+    // TEACHING COLLAPSIBLE COLUMNS
+    // ============================================
+    if (window.innerWidth <= 1200) {
+      document.querySelectorAll('.col-toggle').forEach(btn => {
+        const content = btn.nextElementSibling;
+        const heading = content.querySelector('h1, h2, h3');
+        if (heading) {
+          btn.textContent = heading.textContent;
+          heading.style.display = 'none';
+        }
+        content.classList.add('collapsed');
+        btn.addEventListener('click', () => {
+          content.classList.toggle('collapsed');
         });
       });
     }
 
     // ============================================
-    // SWIPE GESTURES
+    // EXTERNAL LINKS
     // ============================================
-    function addSwipe(element, onSwipeLeft, onSwipeRight) {
-      let startX = 0;
-      let startY = 0;
+document.querySelectorAll('a').forEach(link => {
+  const href = link.getAttribute('href');
+  if (href && !href.startsWith('#') && !href.startsWith('mailto:') && !href.startsWith('/')) {
+    link.setAttribute('target', '_blank');
+    link.setAttribute('rel', 'noopener noreferrer');
+  }
+});
 
-      element.addEventListener('touchstart', (e) => {
-        startX = e.touches[0].clientX;
-        startY = e.touches[0].clientY;
-      }, { passive: true });
 
-      element.addEventListener('touchend', (e) => {
-        const dx = e.changedTouches[0].clientX - startX;
-        const dy = e.changedTouches[0].clientY - startY;
-        if (Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > 40) {
-          if (dx < 0) onSwipeLeft();
-          else onSwipeRight();
-        }
-      }, { passive: true });
-    }
 
-    if (homeCarousel) {
-      addSwipe(homeCarousel,
-        () => document.querySelector('.carousel-btn.next')?.click(),
-        () => document.querySelector('.carousel-btn.prev')?.click()
-      );
-    }
 
-    document.querySelectorAll('.content-slideshow').forEach(slideshow => {
-      addSwipe(slideshow,
-        () => slideshow.querySelector('.content-next')?.click(),
-        () => slideshow.querySelector('.content-prev')?.click()
-      );
-    });
+
 
   </script>
 
