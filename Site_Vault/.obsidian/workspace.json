@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "writing/AESOP.md",
+                "file": "writing/Fraying2.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "AESOP"
+              "title": "Fraying2"
             }
           }
         ]
@@ -185,8 +185,8 @@
   },
   "active": "88c1bd8300163b79",
   "lastOpenFiles": [
-    "writing/Visualizing cultural values in urban planning - a preparatory framework for their integration in digital twins.md",
     "writing/AESOP.md",
+    "writing/Visualizing cultural values in urban planning - a preparatory framework for their integration in digital twins.md",
     "writing/COUNTER-TWINNING IN GOTHENBURG.md",
     "writing/MourningaStranger.md",
     "writing/WAM.md",
