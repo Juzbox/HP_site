@@ -9,4 +9,5 @@ link: https://medium.com/@hugopilate/what-a-mess-a-tale-of-collaborative-photogr
 tags:
 permalink:
 headerimage: /assets/img/1_-sA-uITZK-4uiApZJuvvIg.gif
+order: "10"
 ---

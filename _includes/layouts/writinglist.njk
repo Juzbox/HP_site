@@ -7,7 +7,7 @@ bodyClass: page-writing
 </div>
 <div class="writing-table">
   <div class="writing-table-body">
-    {% for piece in collections.writing | sort(false, false, 'data.year') | reverse %}
+    {% for piece in collections.writing | sort(false, false, 'data.order') %}
     <div class="writing-row">
       <div class="writing-image {% if piece.data.link %}writing-image-external{% endif %}">
         {% if piece.data.headerimage %}

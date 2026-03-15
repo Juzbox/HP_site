@@ -9,4 +9,5 @@ link: https://medium.com/@hugopilate/mourning-a-stranger-brushing-up-against-got
 tags:
 permalink:
 headerimage: /assets/img/1_wScRKviRlpgUb2REiSRgxA.gif
+Order: "11"
 ---

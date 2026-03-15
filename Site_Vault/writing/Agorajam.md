@@ -9,4 +9,5 @@ link: https://medium.com/@hugopilate/the-agora-jam-co-creating-the-agoraverse-b9
 tags:
 permalink:
 headerimage: /assets/img/0_OUh8DWyVURCVOSAK.gif
+order: "5"
 ---

@@ -9,4 +9,5 @@ link: https://medium.com/@hugopilate/fraying-the-matrix-a-cyberlocal-dreams-post
 tags:
 permalink:
 headerimage: /assets/img/scenario2.gif
+Order: "8"
 ---

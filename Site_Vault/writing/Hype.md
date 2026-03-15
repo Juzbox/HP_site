@@ -9,4 +9,5 @@ link: https://medium.com/@hugopilate/balancing-hype-and-accountability-bc3ca52a4
 tags:
 permalink:
 headerimage: /assets/img/Screenshot 2026-03-10 073736.png
+order: "3"
 ---
