@@ -747,14 +747,16 @@ background: rgba(255, 255, 255, 1);
    ============================================ */
 .list-header {
   position: fixed;
-  top: 3.5rem;
+  top: 3rem;
+
   left: 50%;
   transform: translateX(-50%);
   width: 100%;
   max-width: 1200px;
   z-index: 90;
-  background: var(--color-bg);
+  background: var(--color-list);
   padding: 1rem 2rem 5rem;
+
   display: flex;
   flex-direction: column;
   gap: 1.8rem;
@@ -1412,15 +1414,15 @@ Socials links
   }
 
   .right {
-    flex: 1;
-    width: 100%;
-    margin-top: -8rem;
-    min-height: 100vh;
-    line-height: 1.6rem;
-    background: linear-gradient(180deg, transparent 0%, var(--color-bg) 8rem);
-    position: relative;
-    z-index: 2;
-  }
+  flex: 1;
+  width: 100%;
+  margin-top: -8rem;
+  min-height: 100vh;
+  line-height: 1.6rem;
+  background: linear-gradient(180deg, transparent 0%, var(--color-bg-home) 8rem);
+  position: relative;
+  z-index: 2;
+}
 
 
   /* SOCIALS   */
